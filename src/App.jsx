@@ -1,35 +1,86 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const navigate = useNavigate();
+  const [nombreTicket, SetnombreTicket] = useState("")
+  const [descripcionTicket, SetdescripcionTicket] = useState("")
+  const [importanciaTicket, SetimportanciaTicket] = useState("")
+
+  const capturarNombre = (event) =>{
+    SetnombreTicket(event.target.value);
+  };
+
+  const capturarDesc = (event) =>{
+    SetdescripcionTicket(event.target.value);
+  };
+
+  const capturarImportancia = (event) =>{
+    SetimportanciaTicket(event.target.value);
+  };
+
+  const Enviar = () => {
+    
+    console.log("nombre del ticket:" + " " + nombreTicket);
+    console.log("descipcion del ticket" + " " + descripcionTicket)
+    console.log("importancia del ticket" + " " + importanciaTicket)
+
+
+    
+    navigate("/final");
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+      <div><h3>Por favor ingrese su ticket</h3></div>
+
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">
+            Nombre del ticket
+          </label>
+          <input
+            type="text"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder="Error 01"
+            onChange={capturarNombre}
+          />
+        </div>
+
+
+
+        <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">
+            Importancia del Ticket
+          </label>
+        <select class="form-select" aria-label="Default select example" onChange={capturarImportancia}>
+          <option selected>Seleccione</option>
+          <option value="puede_esperar_un_par_de_semanas">1</option>
+          <option value="puede_esperar_un_par_de_dias">2</option>
+          <option value="por_favor_verlo_hoy">3</option>
+          <option value="por_favor_verlo_ahora">4</option>
+          <option value="we_are_fucked">5</option>
+        </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label">
+            Descripcion del ticket
+          </label>
+          <textarea
+            class="form-control"
+            id="El error ocurrio en .... "
+            rows="3"
+            onChange={capturarDesc}
+          ></textarea>
+        </div>
+
+        <button type="button" class="btn btn-dark" onClick={() => Enviar()}>Enviar</button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
