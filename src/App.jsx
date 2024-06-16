@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./App.css";
 
 function App() {
@@ -21,18 +23,28 @@ function App() {
   };
 
   const Enviar = () => {
-    
-    console.log("nombre del ticket:" + " " + nombreTicket);
-    console.log("descipcion del ticket" + " " + descripcionTicket)
-    console.log("importancia del ticket" + " " + importanciaTicket)
+    const fecha = new Date();
+    const month = fecha.getMonth()+1;
+    const year = fecha.getFullYear();
+    const date = fecha. getDate();
+    const fechaTicket =  date + "/" + month + "/" + year;
 
 
-    
-    navigate("/final");
+    if(nombreTicket === "" || descripcionTicket === "" || importanciaTicket === ""){
+      toast.error("campos vacios")
+    }else{
+      console.log("nombre del ticket:" + " " + nombreTicket);
+      console.log("descipcion del ticket" + " " + descripcionTicket)
+      console.log("importancia del ticket" + " " + importanciaTicket)
+      console.log("fecha del ticket" + " " + fechaTicket)
+      navigate("/final");
+      
+    }
   };
 
   return (
     <>
+     <ToastContainer />
       <div><h3>Por favor ingrese su ticket</h3></div>
 
       <div className="card">
